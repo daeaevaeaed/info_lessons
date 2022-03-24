@@ -9,8 +9,11 @@ __all__ = ['List','ListIterativ']
 from operator import getitem
 from typing import Optional
 from collections.abc import Collection 
+# from abc import ABC, abstractmethod
 
 # from abc import abstractmethod
+
+# T = TypeVar("T")
 
 class Listnode():
     """Ein Listen.
@@ -177,10 +180,6 @@ class ListIterativ(List):
             if counter is len(self):
                 return False
         return True
-            
-        
-
-    """__iter__ kann zusätzlich implementiert werden, damit z.B. die for-Schleife mit der Liste funktioniert."""
     
     
     def __len__(self) -> int:
