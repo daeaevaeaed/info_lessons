@@ -239,10 +239,10 @@ class ArrayStack(Stack[T]):
     def isEmpty(self):
         if self.top_index > 0:
             # print("IsEmpty")
-            return True
+            return False
         else:
             # print("isFilled")
-            return False
+            return True
     
     def __len__(self):
         if self.isEmpty():

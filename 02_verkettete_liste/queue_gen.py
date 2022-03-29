@@ -255,16 +255,77 @@ class Queueiterative(Queue[T]):
             return self.first_node.data
         else:
             return
+
+class ArrayStack(Queue[T]):
+    data: list[Optional[T]]
+    def __init__(self):
+        self.max_stack_length = 10
+        self.data = [None]*self.max_stack_length
+        self.top_index = 0
+        self.current = 0
+
+    def enqueue(self, value: object) -> None:
+        if self.top_index < self.max_stack_length:
+            self.data[self.top_index] = value
+            self.top_index += 1
+        else:
+            print("muss größer sein")
+            temp_array = self.data
+            self.max_stack_length *= 2
+            self.data = self.data*2
+    
+    def dequeue(self):
+        if self.current < self.top_index:
+            data = self.data[self.current]
+            self.current += 1
+            return data
+
+    def isEmpty(self):
+        if self.top_index > 0:
+            # print("IsEmpty")
+            return False
+        else:
+            # print("isFilled")
+            return True
+    
+    def __len__(self) -> int:
+        return self.top_index
+
+    def __contains__(self) -> str:
+        return
+
         
-q = Queueiterative()
+q = ArrayStack()
 q.enqueue(19)
 q.enqueue(20)
 q.enqueue(21)
 q.enqueue(22)
 q.enqueue(23)
 q.enqueue(24)
-# print(q.front())
-print(len(q))
-print(str(q))
-q.clear()
-print(str(q))
+q.enqueue(25)
+q.enqueue(26)
+q.enqueue(27)
+q.enqueue(28)
+q.enqueue(29)
+q.enqueue(30)
+q.enqueue(31)
+q.enqueue(32)
+print(q.isEmpty())
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+q.enqueue(999)
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+
