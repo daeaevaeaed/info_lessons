@@ -211,33 +211,79 @@ class Stackiterative(Stack[T]):
 class ArrayStack(Stack[T]):
     data: list[Optional[T]]
     def __init__(self):
-        self.data = [None]*10
-        self.max_stack_length = 0
+        self.max_stack_length = 10
+        self.data = [None]*self.max_stack_length
         self.top_index = 0
     
     
     
     def push(self, value: object) -> None:
-        self.data[self.top_index] = value
-        self.top_index += 1
+        if self.top_index < self.max_stack_length:
+            self.data[self.top_index] = value
+            self.top_index += 1
+        else:
+            print("muss größer sein")
+            temp_array = self.data
+            self.max_stack_length *= 2
+            self.data = self.data*2
         
     
     def top(self):
-        return self.data[self.top_index]
-        
+        return self.data[self.top_index - 1]
+    
+    def pop(self):
+        if self.top_index > 0:
+            self.top_index -= 1
+            return self.data[self.top_index]
+            
+    def isEmpty(self):
+        if self.top_index > 0:
+            # print("IsEmpty")
+            return True
+        else:
+            # print("isFilled")
+            return False
+    
     def __len__(self):
-        return self.current_length
-    
+        if self.isEmpty():
+            return self.top_index
+        else:
+            return 0
     def __contains__(self, __x: object) -> bool:
-        return None
-        
-                
-                
+        pass
     
-s = ArrayStack()
-s.push(10)
-s.push(11)
-s.push(12)
-s.push(26)
-print(s.top())
-print("ende")
+    
+stack1 = ArrayStack()
+stack1.push(10)
+stack1.push(11)
+stack1.push(12)
+stack1.push(26)
+stack1.push(27)
+stack1.push(28)
+stack1.push(29)
+stack1.push(30)
+stack1.push(31)
+stack1.push(32)
+stack1.push(33)
+stack1.push(34)
+stack1.push(35)
+stack1.push(36)
+stack1.push(37)
+print(stack1.pop())
+print(stack1.pop())
+print(stack1.pop())
+print(stack1.pop())
+print(stack1.pop())
+print(stack1.pop())
+print(stack1.pop())
+print(stack1.pop())
+print(stack1.pop())
+print(stack1.pop())
+print(stack1.pop())
+print(stack1.pop())
+print(stack1.pop())
+print(stack1.pop())
+print(stack1.pop())
+print(stack1.pop())
+print(stack1.pop())
+print(stack1.pop())
