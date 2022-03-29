@@ -196,44 +196,75 @@ class Queueiterative(Queue[T]):
         return False
     
     def __len__(self) -> int:
-        pass
-        
-    def remove(self, value: T) -> None:
-        pass
-
-    def pop(self):
-        pass
+        node = self.first_node
+        counter = 0
+        while node is not None:
+            node = node.next_node
+            counter += 1
+        return counter
     
     def isEmpty(self):
-        pass
-    
-    def __len__(self):
-        pass
+        if self.first_node is not None:
+            return False
+        else: return True
     
     def clear(self):
-        pass
+        for i in self:
+            self.remove()
                 
     def remove(self):
-        pass
+        if self.isEmpty():
+            pass
+        else:
+            self.first_node = self.first_node.next_node
+
+    def dequeue(self) -> str:
+        data = self.front()
+        self.remove()
+        return data
+
             
     def __str__(self) -> str:
-        pass
+        if not self.isEmpty():
+            data = "["
+            node = self.first_node
+            for i in self:
+                if data != "[":
+                    data += " "
+                data  += str(node.data)
+                if node.next_node:
+                    data += ","
+                node = node.next_node
+            return data + "]"
+        else:
+            return "Is Empty"
         
     def enqueue(self, value: object) -> None:
-        if self.first_node is None:
+        if self.isEmpty():
             self.first_node = Queuenode(value, None)
-            return
-        prev_node = None
-        next_node = self.first_node
-        while next_node is not None:
-            prev_node = next_node
-            next_node = next_node.next_node
-        prev_node.next_node = Queuenode(value, None)
+        else: 
+            prev_node = None
+            next_node = self.first_node
+            while next_node is not None:
+                prev_node = next_node
+                next_node = next_node.next_node
+            prev_node.next_node = Queuenode(value, None)
     
-    def front(self):
-        return self.first_node.data
+    def front(self) -> str:
+        if not self.isEmpty():
+            return self.first_node.data
+        else:
+            return
         
 q = Queueiterative()
 q.enqueue(19)
-# q.enqueue(20)
+q.enqueue(20)
+q.enqueue(21)
+q.enqueue(22)
+q.enqueue(23)
+q.enqueue(24)
 # print(q.front())
+print(len(q))
+print(str(q))
+q.clear()
+print(str(q))
