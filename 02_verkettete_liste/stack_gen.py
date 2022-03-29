@@ -6,9 +6,11 @@ __version__ = "1.0" # 2022.03
 __author__ = "S. Gebert"
 __all__ = ['List','ListIterativ']
 
+from ast import IsNot
 from typing import Optional, TypeVar, Generic
 from collections.abc import Collection, Iterator
 from abc import ABC, abstractmethod
+
 # from typing_extensions import Self
 
 T = TypeVar("T")
@@ -57,6 +59,7 @@ class Stack(Collection[T]):
         """Gibt die Listenelemente hintereinander aus."""
         return " ".join([str(e) for e in self])
         
+        
 class Stackiterative(Stack[T]):
     """Iterative Implementierung einer Verketteten Liste"""
     def __init__(self):
@@ -79,8 +82,6 @@ class Stackiterative(Stack[T]):
             prev_node = next_node
             next_node = next_node.next_node
         prev_node.next_node = Stacknode(value, None)
-    
-        
         
     def __getitem__(self, index: int) -> T:
         if index < 0:
@@ -207,26 +208,36 @@ class Stackiterative(Stack[T]):
                 data  += str(node.data) + " "
                 node = node.next_node
             return data
+class ArrayStack(Stack[T]):
+    data: list[Optional[T]]
+    def __init__(self):
+        self.data = [None]*10
+        self.max_stack_length = 0
+        self.top_index = 0
+    
+    
+    
+    def push(self, value: object) -> None:
+        self.data[self.top_index] = value
+        self.top_index += 1
+        
+    
+    def top(self):
+        return self.data[self.top_index]
+        
+    def __len__(self):
+        return self.current_length
+    
+    def __contains__(self, __x: object) -> bool:
+        return None
+        
                 
                 
     
-s = Stackiterative()
-s.pop()
+s = ArrayStack()
 s.push(10)
 s.push(11)
 s.push(12)
-s.push(13)
-s.push(14)
-s.push(15)
-# print("hi")
-# print(stack.__str__())
-# print(stack.top())
-# print(stack.top())
-# stack.remove()
-# print(stack.top())
-# print(stack.__str__())
-# stack.clear()
-# print(s.__str__())
-s.pop()
-s.clear()
-# print(s.__str__())
+s.push(26)
+print(s.top())
+print("ende")

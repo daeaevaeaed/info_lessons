@@ -220,7 +220,7 @@ class Queueiterative(Queue[T]):
         pass
         
     def enqueue(self, value: object) -> None:
-        if not self.first_node:
+        if self.first_node is None:
             self.first_node = Queuenode(value, None)
             return
         prev_node = None
@@ -235,5 +235,5 @@ class Queueiterative(Queue[T]):
         
 q = Queueiterative()
 q.enqueue(19)
-q.enqueue(20)
-print(q.front())
+# q.enqueue(20)
+# print(q.front())
