@@ -93,12 +93,6 @@ class Queue(Collection[T]):
     #     """
     #     pass
 
-    def __iter__(self) -> Iterator[T]:
-        """Iterator über die Daten"""
-        node = self.first_node
-        while node is not None:
-            yield node.data
-            node = node.next_node
  
     # @abstractmethod
     # def __len__(self) -> int:
@@ -134,11 +128,7 @@ class Queue(Collection[T]):
     #         ValueError: List.remove(value): value not in list
     #     """
     #     pass
-    
-    def __str__(self) -> str:
-        """Gibt die Listenelemente hintereinander aus."""
-        return " ".join([str(e) for e in self])
-        
+
 class Queueiterative(Queue[T]):
     """Iterative Implementierung einer Verketteten Liste"""
     def __init__(self):
@@ -273,11 +263,14 @@ class ArrayStack(Queue[T]):
             temp_array = self.data
             self.max_stack_length *= 2
             self.data = self.data*2
+            self.data[self.top_index] = value
+            self.top_index += 1
     
     def dequeue(self):
-        if self.current < self.top_index:
-            data = self.data[self.current]
-            self.current += 1
+        if 0 < self.top_index:
+            data = self.data[self.top_index]
+            self.top_index -=1
+
             return data
 
     def isEmpty(self):
@@ -287,7 +280,22 @@ class ArrayStack(Queue[T]):
         else:
             # print("isFilled")
             return True
-    
+
+    def __str__(self) -> str:
+        data = ""
+        counter = 0
+        while counter is not len(self):
+            counter += 1
+            data += str(self.data[counter]) + " "
+        return data
+
+    def __iter__(self) -> Iterator[T]:
+        counter = 0
+        while counter is not (len(self)-1):
+            counter += 1
+            yield self.data[counter]
+
+
     def __len__(self) -> int:
         return self.top_index
 
@@ -299,18 +307,24 @@ q = ArrayStack()
 q.enqueue(19)
 q.enqueue(20)
 q.enqueue(21)
-q.enqueue(22)
-q.enqueue(23)
-q.enqueue(24)
-q.enqueue(25)
-q.enqueue(26)
-q.enqueue(27)
-q.enqueue(28)
-q.enqueue(29)
-q.enqueue(30)
-q.enqueue(31)
-q.enqueue(32)
-print(q.isEmpty())
+# q.enqueue(22)
+# q.enqueue(23)
+# q.enqueue(24)
+# q.enqueue(25)
+# q.enqueue(26)
+# q.enqueue(27)
+# q.enqueue(28)
+# q.enqueue(29)
+# q.enqueue(30)
+# q.enqueue(31)
+# q.enqueue(32)
+# print(q)
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
 print(q.dequeue())
 print(q.dequeue())
 print(q.dequeue())
@@ -328,4 +342,8 @@ print(q.dequeue())
 print(q.dequeue())
 print(q.dequeue())
 print(q.dequeue())
-
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+# print(len(q))

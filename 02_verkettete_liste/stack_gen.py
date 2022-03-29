@@ -254,9 +254,9 @@ class ArrayStack(Stack[T]):
     
     
 stack1 = ArrayStack()
-stack1.push(10)
-stack1.push(11)
-stack1.push(12)
+stack1.push(23)
+stack1.push(24)
+stack1.push(25)
 stack1.push(26)
 stack1.push(27)
 stack1.push(28)
