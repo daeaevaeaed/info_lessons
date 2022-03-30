@@ -93,12 +93,6 @@ class Queue(Collection[T]):
     #     """
     #     pass
 
-    def __iter__(self) -> Iterator[T]:
-        """Iterator über die Daten"""
-        node = self.first_node
-        while node is not None:
-            yield node.data
-            node = node.next_node
  
     # @abstractmethod
     # def __len__(self) -> int:
@@ -134,11 +128,7 @@ class Queue(Collection[T]):
     #         ValueError: List.remove(value): value not in list
     #     """
     #     pass
-    
-    def __str__(self) -> str:
-        """Gibt die Listenelemente hintereinander aus."""
-        return " ".join([str(e) for e in self])
-        
+
 class Queueiterative(Queue[T]):
     """Iterative Implementierung einer Verketteten Liste"""
     def __init__(self):
@@ -196,44 +186,164 @@ class Queueiterative(Queue[T]):
         return False
     
     def __len__(self) -> int:
-        pass
-        
-    def remove(self, value: T) -> None:
-        pass
-
-    def pop(self):
-        pass
+        node = self.first_node
+        counter = 0
+        while node is not None:
+            node = node.next_node
+            counter += 1
+        return counter
     
     def isEmpty(self):
-        pass
-    
-    def __len__(self):
-        pass
+        if self.first_node is not None:
+            return False
+        else: return True
     
     def clear(self):
-        pass
+        for i in self:
+            self.remove()
                 
     def remove(self):
-        pass
+        if self.isEmpty():
+            pass
+        else:
+            self.first_node = self.first_node.next_node
+
+    def dequeue(self) -> str:
+        data = self.front()
+        self.remove()
+        return data
+
             
     def __str__(self) -> str:
-        pass
+        if not self.isEmpty():
+            data = "["
+            node = self.first_node
+            for i in self:
+                if data != "[":
+                    data += " "
+                data  += str(node.data)
+                if node.next_node:
+                    data += ","
+                node = node.next_node
+            return data + "]"
+        else:
+            return "Is Empty"
         
     def enqueue(self, value: object) -> None:
-        if self.first_node is None:
+        if self.isEmpty():
             self.first_node = Queuenode(value, None)
-            return
-        prev_node = None
-        next_node = self.first_node
-        while next_node is not None:
-            prev_node = next_node
-            next_node = next_node.next_node
-        prev_node.next_node = Queuenode(value, None)
+        else: 
+            prev_node = None
+            next_node = self.first_node
+            while next_node is not None:
+                prev_node = next_node
+                next_node = next_node.next_node
+            prev_node.next_node = Queuenode(value, None)
     
-    def front(self):
-        return self.first_node.data
+    def front(self) -> str:
+        if not self.isEmpty():
+            return self.first_node.data
+        else:
+            return
+
+class ArrayStack(Queue[T]):
+    data: list[Optional[T]]
+    def __init__(self):
+        self.max_stack_length = 10
+        self.data = [None]*self.max_stack_length
+        self.top_index = 0
+        self.current = 0
+
+    def enqueue(self, value: object) -> None:
+        if self.top_index < self.max_stack_length:
+            self.data[self.top_index] = value
+            self.top_index += 1
+        else:
+            print("muss größer sein")
+            temp_array = self.data
+            self.max_stack_length *= 2
+            self.data = self.data*2
+            self.data[self.top_index] = value
+            self.top_index += 1
+    
+    def dequeue(self):
+        if 0 < self.top_index:
+            data = self.data[self.top_index]
+            self.top_index -=1
+
+            return data
+
+    def isEmpty(self):
+        if self.top_index > 0:
+            # print("IsEmpty")
+            return False
+        else:
+            # print("isFilled")
+            return True
+
+    def __str__(self) -> str:
+        data = ""
+        counter = 0
+        while counter is not len(self):
+            counter += 1
+            data += str(self.data[counter]) + " "
+        return data
+
+    def __iter__(self) -> Iterator[T]:
+        counter = 0
+        while counter is not (len(self)-1):
+            counter += 1
+            yield self.data[counter]
+
+
+    def __len__(self) -> int:
+        return self.top_index
+
+    def __contains__(self) -> str:
+        return
+
         
-q = Queueiterative()
+q = ArrayStack()
 q.enqueue(19)
-# q.enqueue(20)
-# print(q.front())
+q.enqueue(20)
+q.enqueue(21)
+# q.enqueue(22)
+# q.enqueue(23)
+# q.enqueue(24)
+# q.enqueue(25)
+# q.enqueue(26)
+# q.enqueue(27)
+# q.enqueue(28)
+# q.enqueue(29)
+# q.enqueue(30)
+# q.enqueue(31)
+# q.enqueue(32)
+# print(q)
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+q.enqueue(999)
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+# print(len(q))
