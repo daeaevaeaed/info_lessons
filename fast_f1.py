@@ -1,5 +1,5 @@
 import fastf1
-from fast_f1 import plotting
-from matplotlib import pyplot as plt
-
-print(fastf1.get_event_schedule())
+fastf1.Cache.enable_cache('F:\cache')
+session = fastf1.get_session(2022, 1, "R")
+session.load()
+print(session.laps)
