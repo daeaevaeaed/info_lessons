@@ -1,0 +1,81 @@
+QLabel{
+    font-size: 20px;
+    font: arial;
+    font: bold;
+}
+QWidget{
+background: #00161e;
+color: white;
+font-size: 15px;
+font-weight: 900;
+}
+QFrame{
+    background:#00161e;
+}
+QFrame#fr_player2 > QLabel#lb_player_2_headline, QFrame#fr_player1 > QLabel#lb_player_1_headline{
+    background: #444444;
+    margin-top: 0;
+}
+QFrame#fr_player2 > QLabel, QFrame#fr_player1 > QLabel{
+    background: #11292f;
+    margin-top: 10px;
+    margin-right: 10px;
+    border: 2px solid #000;
+    border-radius: 5px;
+}
+QLabel{
+    background: #00161e;
+}
+QFrame#fr_player2 > QLabel:hover, QFrame#fr_player1 > QLabel:hover{
+}
+QLineEdit{
+    background: #00161e;
+    border: 2px solid #000;
+    border-radius: 5px;
+}
+QPushButton{
+    font-size: 23px;
+    border-radius: 5px;
+    background: #004444;
+}
+QPushButton:hover{
+    background: #005555;
+}
+QSlider{
+    color: yellow;
+}
+QSlider::handle:horizontal{
+    background: gray;
+    
+    margin-right: -10px;
+    margin-left: -10px;
+}
+/* QSlider::sub-page:horizontal{
+    background: rgb(200, 60, 0);
+}
+QSlider::groove:horizontal{
+    background: rgb(230, 90, 0);
+    height: 23px;
+} */
+QSlider::sub-page:horizontal{
+    background: rgb(10,10,10);
+}
+QSlider::groove:horizontal{
+    background: rgb(20,20,20);
+}
+QPushButton#btn_qss_reload{
+    margin-left: 10px;
+}
+QSlider::handle:hover{
+    background: darkblue;
+    height: 23px;
+}
+QFrame#fr_game_board{
+    background: #00161e;
+}
+/* QFrame# 0x00000254978AD2C0 > QLabel:hover{
+    background #00ff00
+} */
+/* QFrame{
+    background: lime;
+} */
